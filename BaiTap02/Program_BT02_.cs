@@ -30,8 +30,31 @@ namespace BaiTap02
         }
         public int NapTien(int soluong)
         {
-            sodu += soluong;
-            Console.WriteLine("So tien da nap vao tai khoan là {0}",sodu);
+            if (soluong > 0)
+            {
+                sodu += soluong;
+            }
+            else
+            {
+                Console.WriteLine("So tien nap phai lon hon 0");
+            }
+            return sodu;
+        }
+        public int ThanhToan(int soluong)
+        {
+            if(soluong > 0 || soluong <= sodu)
+            {
+                sodu -= soluong;
+            }
+            return sodu;
+        }
+        public int ChuyenKhoan(TaiKhoa acc ,int soluong)
+        {
+            if(soluong <= sodu)
+            {
+                sodu-=soluong;
+                acc.sodu+= soluong;
+            }
             return sodu;
         }
 
@@ -40,23 +63,26 @@ namespace BaiTap02
     {
         static void Main(string[] args)
         {
-            TaiKhoa ThanhTu = new TaiKhoa("01234567","THANHTU",1000);
+            TaiKhoa NguyenTu = new TaiKhoa("01234567", "NGUYENTU", 1000);
             Console.Write("Nhap so tien nap : ");
             int naptien = int.Parse(Console.ReadLine());
-            Console.WriteLine("So du hien tai la : {0}",ThanhTu.getsodu()+naptien);
+            NguyenTu.NapTien(naptien);
             Console.Write("Nhap so tien thanh toan : ");
             int thanhtoan = int.Parse(Console.ReadLine());
-            Console.WriteLine("So tien hien tai la : {0}", ThanhTu.getsodu() + naptien - thanhtoan);
+            NguyenTu.ThanhToan(thanhtoan);
             Console.Write("Nhap so tien chuyen khoan : ");
             int chuyenkhoan = int.Parse(Console.ReadLine());
-            if (chuyenkhoan >= ThanhTu.getsodu() + naptien - thanhtoan)
-            {
-                Console.WriteLine("So tien khong hop le");
-            }
-            else
-            {
-                Console.Write("So tien hien tai la : {0}", ThanhTu.getsodu() + naptien - thanhtoan - chuyenkhoan);
-            }
+
+            TaiKhoa ThanhTu = new TaiKhoa("01234567","THANHTU",1000);
+            ThanhTu.NapTien(200);
+            ThanhTu.ThanhToan(50);
+            ThanhTu.ChuyenKhoan(NguyenTu, 100);
+
+            NguyenTu.ChuyenKhoan(ThanhTu, chuyenkhoan);
+
+            Console.WriteLine("id : {0}  name : {1} sodu : {2}", NguyenTu.getid(), NguyenTu.getname(), NguyenTu.getsodu());
+            Console.WriteLine("id : {0}  name : {1} sodu : {2}", ThanhTu.getid(), ThanhTu.getname(), ThanhTu.getsodu());
+
             Console.ReadLine();
         }
     }
