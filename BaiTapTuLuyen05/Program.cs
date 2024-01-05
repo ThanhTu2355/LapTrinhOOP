@@ -57,6 +57,8 @@ namespace BaiTapTuLuyen05
                         Console.WriteLine("Sap xep giam theo gia thanh: ");
                         break;
                     case 4:
+                        quanlyCD.SapXepTangDanTheoTuaCD();
+                        Console.WriteLine("Sap xep tang theo tua CD: ");
                         break;
                     case 5:
                         quanlyCD.XuatketQua();
